@@ -1,0 +1,14 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+body {
+    font-family: 'nunito', sans-serif !important;
+}
+
+.search_icon {
+    top: 50%;
+    transform: translateY(-50%);
+}
