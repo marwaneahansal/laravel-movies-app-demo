@@ -19343,6 +19343,18 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+console.log("ets");
+
+(function () {
+  console.log(document.querySelector('.playTrailer'));
+  document.querySelector('.playTrailer').addEventListener('click', function () {
+    document.querySelector('.trailer').classList.remove("hidden");
+  });
+  document.querySelector('.close').addEventListener('click', function () {
+    document.querySelector('.trailer').classList.add("hidden");
+  });
+})();
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

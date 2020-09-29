@@ -9,14 +9,14 @@
 
     <link rel="stylesheet" href="/css/app.css">
 </head>
-<body class="bg-gray-900 text-white font-sans">
+<body class="bg-gray-900 text-white font-sans overflow-x-hidden">
     <div class="navbar border-b border-gray-800">
         <div class="container mx-auto flex items-center justify-between px-4 py-6">
             <div class="brand-logo text-xl font-bold">
-                <a href="#">MyMovieApp</a>
+                <a href="{{ route('movies.index') }}">MyMovieApp</a>
             </div>
             <ul class="flex items-center">
-                <li class="ml-6 hover:text-gray-300"><a href="#">Movies</a></li>
+                <li class="ml-6 hover:text-gray-300"><a href="{{ route('movies.index') }}">Movies</a></li>
                 <li class="ml-6 hover:text-gray-300"><a href="#">TV Shows</a></li>
                 <li class="ml-6 hover:text-gray-300"><a href="#">Actors</a></li>
                 <li class="ml-6"> 
@@ -29,5 +29,7 @@
         </div>
     </div>
     @yield('content')
+
+    <script src="/js/app.js"></script>
 </body>
 </html>

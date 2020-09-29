@@ -8,9 +8,12 @@ use Illuminate\Support\Facades\Http;
 class MoviesController extends Controller
 {
 
+    
 
     public function index() {
         $API_URI = 'https://api.themoviedb.org/3';
+        
+        
 
         $popularMovies = Http::withToken(config('services.tmdb.token'))
             ->get($API_URI.'/movie/popular')
@@ -24,7 +27,6 @@ class MoviesController extends Controller
         ->get($API_URI.'/movie/top_rated')
         ->json()['results'];
 
-
         $topRatedMovies = array_slice($topRatedMovies, 0, 5);
         $popularMovies = array_slice($popularMovies, 0, 5);
         $genres = collect($genres)->mapWithKeys(function ($genre) {
@@ -33,6 +35,8 @@ class MoviesController extends Controller
 
 
 
+
+        $cachedTime = \Carbon\Carbon::now()->format("d-m-yy h:m:s");
         return view('index', [
             'popularMovies' => $popularMovies,
             'topRatedMovies' => $topRatedMovies,
@@ -46,13 +50,21 @@ class MoviesController extends Controller
         $API_URI = 'https://api.themoviedb.org/3';
 
         $movie = Http::withToken(config('services.tmdb.token'))
-            ->get($API_URI.'/movie/'.$id)
+            ->get($API_URI.'/movie/'.$id.'?append_to_response=credits,videos,recommendations')
             ->json();
 
-        dump($movie);
+        $genres = Http::withToken(config('services.tmdb.token'))
+        ->get($API_URI.'/genre/movie/list')
+        ->json()['genres'];
+
+        $genres = collect($genres)->mapWithKeys(function ($genre) {
+            return [$genre['id'] => $genre['name']];
+        });
+
        
         return view('show', [
-            'movie' => $movie
+            'movie' => $movie,
+            'genres' => $genres
         ]);
     }
 }

@@ -3,7 +3,7 @@
 
 
 @section('content')
-    <div class="movie-info">
+    <div class="movie-info relative">
         <div class="container mx-auto px-4 py-16 flex flex-col md:flex-row">
             <img class="hover:opacity-75" src="{{ 'https://image.tmdb.org/t/p/w500/'.$movie['poster_path'] }}" alt="{{ $movie['title'] }}" style="width: 24rem;">
             <div class="md:ml-24">
@@ -25,11 +25,21 @@
                     </span>
                 </div>
 
-                <div class="mt-8">
-                    <a href="#" class="flex items-center hover:text-gray-300">
+                <div class="mt-8 ">
+                    <button  class="playTrailer flex items-center hover:text-gray-300 cursor-pointer focus:outline-none focus:shadow">
                         <img src="/assets/play.svg" alt="play" class="w-6 mr-2">
                         <p class="text-lg">Play Trailer</p>
-                    </a>
+                    </button>
+                    <div class="trailer fixed h-screen w-screen top-0 left-0 flex bg-black bg-opacity-75 hidden">
+                        <div class="close text-white text-4xl absolute px-10 py-4 cursor-pointer right-0">X</div>
+                        @if (count($movie['videos']['results']) > 0)
+                            <iframe width="60%" height="70%" src="https://www.youtube.com/embed/{{ $movie['videos']['results'][0]['key'] }}" class="self-center mx-auto">
+                            </iframe>
+                        @else
+                            <p class="text-4xl text-white">Sorry! Trailer was removed</p>
+                        @endif
+                        
+                    </div>
                 </div>
 
                 <p class="text-gray-400 italic mt-8 text-lg">{{ $movie['tagline'] }}</p>
@@ -43,8 +53,10 @@
 
 
                 <div class="mt-8">
-                    <p class="text-gray-500">creator:</p>
-                    <p class="pl-1">Name of the creator</p>
+                    <p class="text-gray-500">Spoken Languages:</p>
+                    @foreach ($movie['spoken_languages'] as $language)
+                        <p class="pl-1">{{ $language['name'] }}.</p>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -52,16 +64,30 @@
 
     <div class="cast">
         <div class="container mx-auto px-4 py-16">
-            <h2 class="text-4xl font-semibold">Cast</h2>
+            <h2 class="text-4xl font-semibold">Cast:</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-                <div class="mt-8">
-                    <a href="#"><div class="bg-orange-700 h-64"></div></a>
-                    <div class="mt-2">
-                        <a href="#" class="mt-2 text-lg hover:text-gray-300">Real Name</a>
-                        <p class="text-gray-200 text-sm">Movie Character</p>
-                    </div>
-                </div>
-                
+                @foreach ($movie['credits']['cast'] as $cast)
+                    @if ($loop->index < 5)
+                        <div class="mt-8">
+                            <a href="#"><img class="hover:opacity-75" src="{{ 'https://image.tmdb.org/t/p/w500/'.$cast['profile_path'] }}" alt="{{ $cast['name']}}"></a>
+                            <div class="mt-2">
+                                <a href="#" class="mt-2 text-lg hover:text-gray-300">{{ $cast['name']}}</a>
+                                <p class="text-gray-200 text-sm">{{ $cast['character']}}</p>
+                            </div>
+                        </div> 
+                    @endif
+                @endforeach
+            </div>
+        </div>
+    </div>
+
+    <div class="recommendation">
+        <div class="container mx-auto px-4 py-16">
+            <h2 class="text-4xl font-semibold">Other Recommandation:</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+                @foreach ($movie['recommendations']['results'] as $movie)
+                    <x-movie-card :movie="$movie" :genres="$genres"/>
+                @endforeach
             </div>
         </div>
     </div>

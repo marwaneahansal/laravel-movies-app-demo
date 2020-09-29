@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <div class="popular_movies pt-24">
+        <div class="popular_movies py-24">
             <h2 class="uppercase text-orange-600 text-xl font-bold">Top Rated Movies</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
                 @foreach ($topRatedMovies as $topRatedMovie)
