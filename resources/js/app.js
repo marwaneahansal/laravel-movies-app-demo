@@ -1,17 +1,19 @@
 require('./bootstrap');
-console.log("ets");
+import 'alpinejs';
 
 
-    
-(() => {
-    console.log(document.querySelector('.playTrailer'));
-    document.querySelector('.playTrailer').addEventListener('click', () => {
+let playTrailer = document.querySelector('.playTrailer');
+let closeTrailer = document.querySelector('.close');
+
+if(playTrailer && closeTrailer) {
+    playTrailer.addEventListener('click', () => {
         document.querySelector('.trailer').classList.remove("hidden");
     });
     
-    document.querySelector('.close').addEventListener('click', () => {
+    closeTrailer.addEventListener('click', () => {
         document.querySelector('.trailer').classList.add("hidden");
     });
-})();
+    
+}
 
 
