@@ -27,8 +27,8 @@ class MoviesController extends Controller
         ->get($API_URI.'/movie/top_rated')
         ->json()['results'];
 
-        $topRatedMovies = array_slice($topRatedMovies, 0, 5);
-        $popularMovies = array_slice($popularMovies, 0, 5);
+        $topRatedMovies = collect($topRatedMovies)->take(5);
+        $popularMovies = collect($popularMovies)->take(5);
         $genres = collect($genres)->mapWithKeys(function ($genre) {
             return [$genre['id'] => $genre['name']];
         });
@@ -37,7 +37,7 @@ class MoviesController extends Controller
 
 
         $cachedTime = \Carbon\Carbon::now()->format("d-m-yy h:m:s");
-        return view('index', [
+        return view('movies/index', [
             'popularMovies' => $popularMovies,
             'topRatedMovies' => $topRatedMovies,
             'genres' => $genres
@@ -62,7 +62,7 @@ class MoviesController extends Controller
         });
 
        
-        return view('show', [
+        return view('movies/show', [
             'movie' => $movie,
             'genres' => $genres
         ]);

@@ -74,7 +74,9 @@
                                 <a href="#" class="mt-2 text-lg hover:text-gray-300">{{ $cast['name']}}</a>
                                 <p class="text-gray-200 text-sm">{{ $cast['character']}}</p>
                             </div>
-                        </div> 
+                        </div>
+                    @else
+                        @break
                     @endif
                 @endforeach
             </div>
