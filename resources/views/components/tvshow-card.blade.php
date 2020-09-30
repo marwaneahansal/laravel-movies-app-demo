@@ -1,4 +1,9 @@
 <div class="mt-8">
+    @if ($tvShow['poster_path'] != "")
+        <a href="{{ route('tvshows.show', $tvShow['id']) }}"><img class="hover:opacity-75" src="{{ 'https://image.tmdb.org/t/p/w500/'.$tvShow['poster_path'] }}" alt="{{ $tvShow['name'] }}"></a>
+    @else
+        <a href="{{ route('tvshows.show', $tvShow['id']) }}"><img class="hover:opacity-75" src="/assets/no_image.png" alt="{{ $tvShow['name'] }}"></a>
+    @endif
     <a href="{{ route('tvshows.show', $tvShow['id']) }}"><img class="hover:opacity-75" src="{{ 'https://image.tmdb.org/t/p/w500/'.$tvShow['poster_path'] }}" alt="{{ $tvShow['name'] }}"></a>
     <div class="mt-2">
         <a href="{{ route('tvshows.show', $tvShow['id']) }}" class="mt-2 text-lg hover:text-gray-300">{{ $tvShow['name'] }}</a>

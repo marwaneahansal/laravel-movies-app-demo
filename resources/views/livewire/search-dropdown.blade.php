@@ -10,12 +10,20 @@
                     <div class="border-b border-gray-700">
                         @if ($result['media_type'] == "movie")
                             <a href="{{ route('movies.show', $result['id']) }}" class="block hover:bg-gray-700 px-3 py-3 flex items-center">
-                                <img  class="w-12" src="{{ 'https://image.tmdb.org/t/p/w92/'.$result['poster_path'] }}" alt="{{ $result['title'] }}">
+                                @if ($result['poster_path'] != "")
+                                    <img  class="w-12" src="{{ 'https://image.tmdb.org/t/p/w92/'.$result['poster_path'] }}" alt="{{ $result['title'] }}">
+                                @else
+                                    <img  class="w-12" src="/assets/no_image.png" alt="{{ $result['title'] }}">
+                                @endif
                                 <p class="ml-4">{{ $result['title'] }}</p>
                             </a>
                         @else
                             <a href="{{ route('tvshows.show', $result['id']) }}" class="block hover:bg-gray-700 px-3 py-3 flex items-center">
-                                <img  class="w-12" src="{{ 'https://image.tmdb.org/t/p/w92/'.$result['poster_path'] }}" alt="{{ $result['name'] }}">
+                                @if ($result['poster_path'] != "")
+                                    <img  class="w-12" src="{{ 'https://image.tmdb.org/t/p/w92/'.$result['poster_path'] }}" alt="{{ $result['name'] }}">
+                                @else
+                                    <img  class="w-12" src="/assets/no_image.png" alt="{{ $result['name'] }}">
+                                @endif
                                 <p class="ml-4">{{ $result['name'] }}</p>
                             </a>                       
                         @endif

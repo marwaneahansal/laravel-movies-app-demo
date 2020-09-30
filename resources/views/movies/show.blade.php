@@ -5,7 +5,11 @@
 @section('content')
     <div class="movie-info relative">
         <div class="container mx-auto px-4 py-16 flex flex-col md:flex-row">
-            <img class="hover:opacity-75" src="{{ 'https://image.tmdb.org/t/p/w500/'.$movie['poster_path'] }}" alt="{{ $movie['title'] }}" style="width: 24rem;">
+            @if ($movie['poster_path'] != "")
+                <img class="hover:opacity-75" src="{{ 'https://image.tmdb.org/t/p/w500/'.$movie['poster_path'] }}" alt="{{ $movie['title'] }}" style="width: 24rem;">
+            @else
+                <img class="hover:opacity-75" src="/assets/no_image.png" alt="{{ $movie['title'] }}" style="width: 24rem;">
+            @endif
             <div class="md:ml-24">
                 <h2 class="text-3xl font-semibold">{{ $movie['title'] }}</h2>
                 <div class="flex flex-col text-gray-400 text-sm">

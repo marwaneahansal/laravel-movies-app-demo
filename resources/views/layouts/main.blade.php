@@ -19,7 +19,7 @@
             <ul class="flex items-center">
                 <li class="ml-6 hover:text-gray-300"><a href="{{ route('movies.index') }}">Movies</a></li>
                 <li class="ml-6 hover:text-gray-300"><a href="{{ route('tvshows.index') }}">TV Shows</a></li>
-                <li class="ml-6 hover:text-gray-300"><a href="#">Actors</a></li>
+                <li class="ml-6 hover:text-gray-300"><a href="{{ route('actors.index') }}">Actors</a></li>
                 <li class="ml-6"> 
                     <livewire:search-dropdown>
                 </li>
