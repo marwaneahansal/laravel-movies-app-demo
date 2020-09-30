@@ -54,10 +54,19 @@ class TvshowsController extends Controller
             ->get($API_URI.'/tv/'.$id.'?append_to_response=credits,videos,recommendations')
             ->json();
 
-        dump($show);
+        $genres = Http::withToken(config('services.tmdb.token'))
+        ->get($API_URI.'/genre/tv/list')
+        ->json()['genres'];
+
+        $genres = collect($genres)->mapWithKeys(function ($genre) {
+            return [$genre['id'] => $genre['name']];
+        });
+    
+
 
         return view('tvshows.show', [
-            "show" => $show
+            "show" => $show,
+            "genres" => $genres
         ]);
     }
 }

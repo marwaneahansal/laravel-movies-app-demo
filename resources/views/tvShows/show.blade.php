@@ -80,11 +80,11 @@
         </div>
     </div>
 
-    {{-- <div class="cast">
+    <div class="cast">
         <div class="container mx-auto px-4 py-16">
             <h2 class="text-4xl font-semibold">Cast:</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-                @foreach ($movie['credits']['cast'] as $cast)
+                @foreach ($show['credits']['cast'] as $cast)
                     @if ($loop->index < 5)
                         <div class="mt-8">
                             <a href="#"><img class="hover:opacity-75" src="{{ 'https://image.tmdb.org/t/p/w500/'.$cast['profile_path'] }}" alt="{{ $cast['name']}}"></a>
@@ -105,10 +105,10 @@
         <div class="container mx-auto px-4 py-16">
             <h2 class="text-4xl font-semibold">Other Recommandation:</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-                @foreach ($movie['recommendations']['results'] as $movie)
-                    <x-movie-card :movie="$movie" :genres="$genres"/>
+                @foreach ($show['recommendations']['results'] as $show)
+                    <x-tvshow-card :tvShow="$show" :genres="$genres"/>
                 @endforeach
             </div>
         </div>
-    </div> --}}
+    </div>
 @endsection

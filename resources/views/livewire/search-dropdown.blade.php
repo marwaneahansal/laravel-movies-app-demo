@@ -8,10 +8,18 @@
             @if($searchResults->count() > 0)
                 @foreach ($searchResults as $result)
                     <div class="border-b border-gray-700">
-                        <a href="{{ route('movies.show', $result['id']) }}" class="block hover:bg-gray-700 px-3 py-3 flex items-center">
-                            <img  class="w-12" src="{{ 'https://image.tmdb.org/t/p/w92/'.$result['poster_path'] }}" alt="{{ $result['title'] }}">
-                            <p class="ml-4">{{ $result['title'] }}</p>
-                        </a>
+                        @if ($result['media_type'] == "movie")
+                            <a href="{{ route('movies.show', $result['id']) }}" class="block hover:bg-gray-700 px-3 py-3 flex items-center">
+                                <img  class="w-12" src="{{ 'https://image.tmdb.org/t/p/w92/'.$result['poster_path'] }}" alt="{{ $result['title'] }}">
+                                <p class="ml-4">{{ $result['title'] }}</p>
+                            </a>
+                        @else
+                            <a href="{{ route('tvshows.show', $result['id']) }}" class="block hover:bg-gray-700 px-3 py-3 flex items-center">
+                                <img  class="w-12" src="{{ 'https://image.tmdb.org/t/p/w92/'.$result['poster_path'] }}" alt="{{ $result['name'] }}">
+                                <p class="ml-4">{{ $result['name'] }}</p>
+                            </a>                       
+                        @endif
+                        
                     </div>  
                 @endforeach
             @elseif(strlen($search) > 2)
