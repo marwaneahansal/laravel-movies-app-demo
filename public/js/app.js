@@ -21248,14 +21248,19 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
-var playTrailer = document.querySelector('.playTrailer');
-var closeTrailer = document.querySelector('.close');
+var tag = document.createElement('script');
+var playTrailerElem = document.querySelector('.playTrailer');
+var closeTrailerElem = document.querySelector('.close');
+var iframeElem = document.getElementById("ytbPlayer");
 
-if (playTrailer && closeTrailer) {
-  playTrailer.addEventListener('click', function () {
+if (playTrailerElem && closeTrailerElem) {
+  var iframeSrc = iframeElem.src;
+  playTrailerElem.addEventListener('click', function () {
+    iframeElem.src = iframeSrc;
     document.querySelector('.trailer').classList.remove("hidden");
   });
-  closeTrailer.addEventListener('click', function () {
+  closeTrailerElem.addEventListener('click', function () {
+    iframeElem.src = "";
     document.querySelector('.trailer').classList.add("hidden");
   });
 }

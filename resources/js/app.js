@@ -1,16 +1,28 @@
 require('./bootstrap');
 import 'alpinejs';
 
+var tag = document.createElement('script');
 
-let playTrailer = document.querySelector('.playTrailer');
-let closeTrailer = document.querySelector('.close');
 
-if(playTrailer && closeTrailer) {
-    playTrailer.addEventListener('click', () => {
+
+
+
+let playTrailerElem = document.querySelector('.playTrailer');
+let closeTrailerElem = document.querySelector('.close');
+let iframeElem = document.getElementById("ytbPlayer");
+
+if(playTrailerElem && closeTrailerElem) {
+
+    var iframeSrc = iframeElem.src;
+    playTrailerElem.addEventListener('click', () => {
+        iframeElem.src = iframeSrc;
         document.querySelector('.trailer').classList.remove("hidden");
     });
-    
-    closeTrailer.addEventListener('click', () => {
+
+      
+
+    closeTrailerElem.addEventListener('click', () => {
+        iframeElem.src = "";
         document.querySelector('.trailer').classList.add("hidden");
     });
     

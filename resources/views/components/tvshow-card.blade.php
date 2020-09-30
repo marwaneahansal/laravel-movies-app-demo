@@ -1,7 +1,7 @@
 <div class="mt-8">
     <a href="{{ route('tvshows.show', $tvShow['id']) }}"><img class="hover:opacity-75" src="{{ 'https://image.tmdb.org/t/p/w500/'.$tvShow['poster_path'] }}" alt="{{ $tvShow['name'] }}"></a>
     <div class="mt-2">
-        <a href="{{ route('movies.show', $tvShow['id']) }}" class="mt-2 text-lg hover:text-gray-300">{{ $tvShow['name'] }}</a>
+        <a href="{{ route('tvshows.show', $tvShow['id']) }}" class="mt-2 text-lg hover:text-gray-300">{{ $tvShow['name'] }}</a>
         <div class="flex items-center text-gray-400 text-sm">
             <img src="/assets/star.svg" alt="rating star" class="w-3">
             <span class="ml-1">{{ $tvShow['vote_average'] }}/10</span>

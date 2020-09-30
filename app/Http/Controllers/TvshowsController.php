@@ -33,7 +33,7 @@ class TvshowsController extends Controller
             return [$genre['id'] => $genre['name']];
         });
 
-        dump($popularTvShows);
+        // dump($popularTvShows);
 
         return view('tvshows.index', [
             "popularTvShows" => $popularTvShows,
@@ -44,7 +44,20 @@ class TvshowsController extends Controller
 
 
 
-    public function shwo($id) {
-        return view('tvshows.show');
+    public function show($id) {
+
+        $API_URI = 'https://api.themoviedb.org/3';
+        
+        
+
+        $show = Http::withToken(config('services.tmdb.token'))
+            ->get($API_URI.'/tv/'.$id.'?append_to_response=credits,videos,recommendations')
+            ->json();
+
+        dump($show);
+
+        return view('tvshows.show', [
+            "show" => $show
+        ]);
     }
 }
